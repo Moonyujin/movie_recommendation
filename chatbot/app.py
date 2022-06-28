@@ -23,7 +23,7 @@ def returnPreference(movies_name):
     selected_movie_list = []
 
     for movie in movie_list:
-        movie_cd_url = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&movieNm='+movie[:-5]
+        movie_cd_url = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key='+키+'&movieNm='+movie[:-5]
         
         res = requests.get(movie_cd_url)
         text = res.text
@@ -68,7 +68,7 @@ def returnPreference(movies_name):
         movie_mainactor_list.clear()
         movie_genre_list.clear()
 
-        actor_list_url = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd='+movieCd
+        actor_list_url = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key='+키+'&movieCd='+movieCd
         res = requests.get(actor_list_url)
         text = res.text
         d = json.loads(text)
@@ -122,7 +122,7 @@ def returnPreference(movies_name):
     filmo_list = []
     final_filmo_list = []
     for prefer_actor in prefer_actor_list:
-        actor_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key=f5eef3421c602c6cb7ea224104795888'+'&peopleNm='+prefer_actor
+        actor_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key='+키+'&peopleNm='+prefer_actor
         
         res = requests.get(actor_list_url)
         text = res.text
@@ -168,7 +168,7 @@ def returnPreference(movies_name):
     moviepeople=[]
 
     for i in range(len(final_filmo_list)):
-        genre_search_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=e3a5ce5b387559b21c721bb76a8024a1'+'&movieNm='+final_filmo_list[i]
+        genre_search_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key='+키+'&movieNm='+final_filmo_list[i]
         res = requests.get(genre_search_url)
         text = res.text
         d = json.loads(text)
@@ -182,7 +182,7 @@ def returnPreference(movies_name):
                 genre_search.append([item['movieNm'], item['genreAlt']])
             
     for i in range(len(movieID)):
-        id_search_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=e3a5ce5b387559b21c721bb76a8024a1'+'&movieCd='+movieID[i]
+        id_search_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key='+키+'&movieCd='+movieID[i]
         res = requests.get(id_search_url)
         text = res.text
         d = json.loads(text)
@@ -196,7 +196,7 @@ def returnPreference(movies_name):
                 odt.append(dd['openDt'])
 
     for i in range(len(movieN)):
-        duplit_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=e3a5ce5b387559b21c721bb76a8024a1'+'&movieNm='+movieN[i]
+        duplit_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key='+키+'&movieNm='+movieN[i]
         res = requests.get(duplit_url)
         text = res.text
         d = json.loads(text)
@@ -224,7 +224,7 @@ def returnPreference(movies_name):
 
 # 감독 코드 추출
 def returnDire(director_name):
-    director_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key=7517271e979b45a226732e29483c8ca6'+'&peopleNm='+director_name
+    director_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key='+키+'&peopleNm='+director_name
     
     res = requests.get(director_list_url)
     text = res.text
@@ -248,7 +248,7 @@ def returnDire(director_name):
 
 # 영화 코드 추출
 def returnMovie(director_code):
-    movie_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json?key=7517271e979b45a226732e29483c8ca6'+'&peopleCd='+director_code
+    movie_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json?key='+키+'&peopleCd='+director_code
     
     res = requests.get(movie_url)
     text = res.text
@@ -310,7 +310,7 @@ def returnRating(director_name, movieCd_df):
 
 
 def nationMovie(nation_name):
-  nation_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/code/searchCodeList.json?key=f5eef3421c602c6cb7ea224104795888&comCode=2204'
+  nation_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/code/searchCodeList.json?key='+키+'&comCode=2204'
   res = requests.get(nation_list_url)
   text = res.text
   m = json.loads(text)
@@ -319,7 +319,7 @@ def nationMovie(nation_name):
       nation_code=m['codes'][i]['fullCd']
       break
 
-  movie_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=b76f8b086ea1b19e0fcad20881c5fc7b&itemPerPage=20&repNationCd='+ str(nation_code) #50개 해봄
+  movie_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key='+키+'&itemPerPage=20&repNationCd='+ str(nation_code) #50개 해봄
   res = requests.get(movie_list_url)
   text = res.text
   d = json.loads(text)
@@ -379,7 +379,7 @@ def nationMovie(nation_name):
 
 
 def actorMovie(actor_name): 
-  actor_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key=d99e474ec53733a372d8413bd2753506'+'&peopleNm='+str(actor_name)
+  actor_list_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key='+키+'&peopleNm='+str(actor_name)
   res = requests.get(actor_list_url)
   text = res.text
 
@@ -400,7 +400,7 @@ def actorMovie(actor_name):
 
   movieCd_list = []
   for actor in actor_df['peopleCd']:
-    movie_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json?key=d99e474ec53733a372d8413bd2753506'+'&peopleCd='+actor
+    movie_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json?key='+키+'&peopleCd='+actor
     res = requests.get(movie_url)
     text = res.text
     d = json.loads(text)
